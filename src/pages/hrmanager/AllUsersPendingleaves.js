@@ -60,9 +60,6 @@ export default function Pendingleaves() {
   const indexOfFirstLeave = indexOfLastLeave - leavesPerPage;
   const currentLeaves = leaverequest.slice(indexOfFirstLeave, indexOfLastLeave);
 
-  const handleLeaveRequestEdit = (leaveId) => {
-    console.log(`Editing leave request with ID ${leaveId}`);
-  };
 
   return (
     <ThemeProvider theme={theme}>

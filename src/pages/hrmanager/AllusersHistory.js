@@ -11,7 +11,6 @@ import {
   Typography,
   Pagination,
 } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
 
@@ -64,11 +63,9 @@ const History = () => {
       try {
         const response = await axios.get(`http://localhost:3009/leaverequest/approveandrejectleaves`);
         setLeaverequest(response.data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
+      } catch (error) {
+        console.log(error.message);
+      } 
     };
     fetchData();
   }, []);
