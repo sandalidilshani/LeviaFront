@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Card, CardContent, Stack, Avatar, Box, Typography, Chip, Link, Divider, useTheme } from "@mui/material";
 import { Email, Phone, Home, GitHub, Code, Cake } from "@mui/icons-material";
 import axios from 'axios';
-import { useAuth } from "../../contexts/AuthContext";
 
 export default function UserDetailsCard({userId}) {
   console.log(userId)

@@ -1,10 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import Layout from "../../components/user/Layout";
+import React from "react";
 import { Box, useMediaQuery } from "@mui/material";
-import { useTheme, ThemeProvider } from "@mui/material/styles";
-import LeaveCard from "../../components/shared/leaveCountCard";
-import theme from "../../theme"; // assuming theme is in the same directory
+import { useTheme } from "@mui/material/styles";
 import UserCard from "../../components/user/UserCard";
 
 export default function Home() {

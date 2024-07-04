@@ -1,14 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import {
-  AccountBox,
-  Article,
-  Group,
-  Home,
-  ModeNight,
   Person,
-  Settings,
-  Storefront,
   Logout,
 } from "@mui/icons-material";
 import {
@@ -19,7 +11,7 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Typography,
+  
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import logo from "../../images/logo.png";

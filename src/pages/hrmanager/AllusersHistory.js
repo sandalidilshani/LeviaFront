@@ -8,15 +8,12 @@ import {
   TableHead,
   TableRow,
   TableBody,
-  Button,
   Typography,
   Pagination,
-  CircularProgress,
 } from "@mui/material";
-import { useTheme, ThemeProvider } from "@mui/material/styles";
+import { useTheme } from "@mui/material/styles";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
-import Searchbar from "../../components/hrmanager/Searchbar";
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -58,11 +55,8 @@ const LeaveRequestRow = ({ request }) => (
 );
 
 const History = () => {
-  const theme = useTheme();
   const [leaverequest, setLeaverequest] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const leavesPerPage = 5;
 
   useEffect(() => {

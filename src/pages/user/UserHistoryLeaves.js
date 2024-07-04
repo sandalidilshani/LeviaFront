@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import Layout from "../../components/user/Layout";
 import {
   Box,
   TableContainer,
