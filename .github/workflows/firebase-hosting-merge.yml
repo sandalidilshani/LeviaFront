@@ -12,8 +12,11 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: '14' # or your preferred version
-      - name: Install dependencies
-        run: npm ci
+      - name: Clear npm cache and install dependencies
+        run: |
+          npm cache clean --force
+          npm install @emotion/react
+          npm ci
       - name: Build
         run: npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
