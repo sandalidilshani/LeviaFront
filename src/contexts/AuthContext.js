@@ -1,5 +1,5 @@
-import { createContext, useState, useEffect, useContext } from 'react';
-import { jwtDecode } from 'jwt-decode';
+import { createContext, useState, useEffect, useContext, useCallback } from 'react';
+import jwtDecode from 'jwt-decode';
 import axios from 'axios';
 
 const AuthContext = createContext(null);
@@ -15,26 +15,16 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      initializeAuth(token);
-    } else {
-      setLoading(false);
-    }
-  }, []);
-
-  const initializeAuth = (token) => {
+  const initializeAuth = useCallback((token) => {
     try {
       const decodedToken = jwtDecode(token);
       setUser(decodedToken.sub);
-      const role= (decodedToken.role)
-      console.log(role)
-      if(role==='HRManager')
-      {
-        setUserRole('HRManager')
-      }else{
-        setUserRole('User')
+      const role = decodedToken.role;
+      console.log(role);
+      if (role === 'HRManager') {
+        setUserRole('HRManager');
+      } else {
+        setUserRole('User');
       }
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
       setAccessToken(token);
@@ -44,7 +34,16 @@ export function AuthProvider({ children }) {
       logout();
     }
     setLoading(false);
-  };
+  }, []);
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      initializeAuth(token);
+    } else {
+      setLoading(false);
+    }
+  }, [initializeAuth]);
 
   const login = (token) => {
     localStorage.setItem("accessToken", token);

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Box, useMediaQuery } from "@mui/material";
+import { Box } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import LeaveCard from "../../components/shared/leaveCountCard";
 import { useAuth } from "../../contexts/AuthContext";
@@ -8,7 +8,6 @@ import { useAuth } from "../../contexts/AuthContext";
 export default function UserCard() {
   const theme = useTheme();
   const { user } = useAuth();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [pendingLeavesCount, setPendingLeavesCount] = useState(null);
   const [userLeaveCount, setUserLeavesCount] = useState(null);
   const [availableLeaveCount, setAvailableLeaveCount] = useState(null);

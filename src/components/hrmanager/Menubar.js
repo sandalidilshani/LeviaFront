@@ -1,5 +1,5 @@
 import {
-  Navigation,
+  
   Person,
 } from "@mui/icons-material";
 import {
@@ -83,6 +83,7 @@ const Sidebar = () => {
           src={logo}
           width="256px"
           height="271px"
+          alt="Logo"
           style={{ objectFit: "contain" }}
         />
       </Box>

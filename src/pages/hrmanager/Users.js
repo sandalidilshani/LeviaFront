@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import Layout from "../../components/hrmanager/Layout";
 import Searchbar from "../../components/hrmanager/Searchbar";
 import {
   Box,
@@ -61,9 +60,7 @@ export default function Pendingleaves() {
   const indexOfFirstLeave = indexOfLastLeave - leavesPerPage;
   const currentLeaves = leaverequest.slice(indexOfFirstLeave, indexOfLastLeave);
 
-  const handleLeaveRequestEdit = (leaveId) => {
-    console.log(`Editing leave request with ID ${leaveId}`);
-  };
+
 
   return (
     <ThemeProvider theme={theme}>

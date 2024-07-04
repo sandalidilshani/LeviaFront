@@ -6,7 +6,6 @@ import LeaveCard from "../../components/shared/leaveCountCard";
 
 export default function UserCard({userId}) {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
   const [pendingLeavesCount, setPendingLeavesCount] = useState(null);
   const [userLeaveCount, setUserLeavesCount] = useState(null);
   const [availableLeaveCount, setAvailableLeaveCount] = useState(null);

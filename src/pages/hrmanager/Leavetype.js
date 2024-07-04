@@ -1,7 +1,5 @@
 import React, { useEffect } from "react";
 import axios from "axios";
-import Layout from "../../components/hrmanager/Layout";
-import Searchbar from "../../components/hrmanager/Searchbar";
 import {
   Box,
   TableContainer,
@@ -17,7 +15,6 @@ import {
   Grid,
 } from "@mui/material";
 import { useTheme, ThemeProvider } from "@mui/material/styles";
-import { Link } from "react-router-dom";
 import TableCell, { tableCellClasses } from "@mui/material/TableCell";
 import { styled } from "@mui/material/styles";
 
@@ -70,7 +67,7 @@ export default function History() {
 
   const AddNewLeaveType=async ()=>{
     try{
-      const response=axios.post("http://localhost:3009/leavetype/addtype",{
+      await axios.post("http://localhost:3009/leavetype/addtype",{
         type:newLeaveType,
         description:newLeaveTypeDescription
       })
