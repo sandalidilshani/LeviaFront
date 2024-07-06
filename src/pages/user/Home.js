@@ -6,7 +6,7 @@ import UserCard from "../../components/user/UserCard";
 export default function Home() {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  //decode token for user id
+  //decode token for user id for context
   
 
   return (
