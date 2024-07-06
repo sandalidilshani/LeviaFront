@@ -56,7 +56,7 @@ export default function Login() {
 
   return (
     <Box sx={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <Card sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, width: { xs: "90%", sm: "80%", md: "60%" }, height: { xs: "auto", md: "80vh" } }}>
+      <Card sx={{ display: "flex", flexDirection: { xs: "column-reverse", md: "row" }, width: { xs: "90%", sm: "80%", md: "60%" }, height: { xs: "auto", md: "80vh" } }}>
         <Box sx={{ display: "flex", flexDirection: "column", width: "100%", alignItems: "center", justifyContent: "center", backgroundColor: { xs: "white", md: "inherit" } }}>
           <form onSubmit={handleSubmit} style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
             <Button
@@ -105,7 +105,7 @@ export default function Login() {
 
             <Button
               variant="contained"
-              sx={{ m: 1, width: "80%", padding: 2, backgroundColor: theme.palette.primary.main, marginBottom: 2 }}
+              sx={{ m: 1, width: "80%", padding: 2, backgroundColor: theme.colors.primary, marginBottom: 2 }}
               type="submit"
             >
               Login
