@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Box, Card, CardMedia, IconButton, Typography, Alert, FilledInput, InputLabel, InputAdornment, FormControl, TextField, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import jwtDecode from "jwt-decode"; // Correct import
+import {jwtDecode} from "jwt-decode"; // Correct import
 import logo from "./../../images/logo.png";
 import { useAuth } from "../../contexts/AuthContext";
 
