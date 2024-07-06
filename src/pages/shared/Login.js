@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Box, Card, CardMedia, IconButton, Typography, Alert, FilledInput, InputLabel, InputAdornment, FormControl, TextField, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import { jwtDecode } from "jwt-decode";
+import jwtDecode from "jwt-decode"; // Correct import
 import logo from "./../../images/logo.png";
 import { useAuth } from "../../contexts/AuthContext";
 
@@ -55,13 +55,13 @@ export default function Login() {
   };
 
   return (
-    <Box sx={{ width: "100%", height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <Card sx={{ display: "flex", width: "80%", height: "80vh" }}>
-        <Box sx={{ display: "flex", flexDirection: "column", width: "60%", alignItems: "center", justifyContent: "center" }}>
+    <Box sx={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <Card sx={{ display: "flex", flexDirection: { xs: "column", md: "row" }, width: { xs: "90%", sm: "80%", md: "60%" }, height: { xs: "auto", md: "80vh" } }}>
+        <Box sx={{ display: "flex", flexDirection: "column", width: "100%", alignItems: "center", justifyContent: "center", backgroundColor: { xs: "white", md: "inherit" } }}>
           <form onSubmit={handleSubmit} style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
             <Button
               variant="contained"
-              sx={{ m: 1, width: "50%", padding: 4, backgroundColor: theme.palette.primary.main, marginBottom: 2 }}
+              sx={{ m: 1, width: "80%", padding: 4, backgroundColor: theme.palette.primary.main, marginBottom: 2 }}
               type="submit"
             >
               Login With PlazerUser
@@ -74,13 +74,13 @@ export default function Login() {
               id="uname"
               label="User Name"
               variant="filled"
-              sx={{ m: 1, width: "50%" }}
+              sx={{ m: 1, width: "80%" }}
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
               error={!!error}
             />
 
-            <FormControl sx={{ m: 1, width: "50%", marginBottom: 3 }} variant="filled">
+            <FormControl sx={{ m: 1, width: "80%", marginBottom: 3 }} variant="filled">
               <InputLabel htmlFor="filled-adornment-password">Password</InputLabel>
               <FilledInput
                 id="filled-adornment-password"
@@ -105,7 +105,7 @@ export default function Login() {
 
             <Button
               variant="contained"
-              sx={{ m: 1, width: "50%", padding: 2, backgroundColor: theme.palette.primary.main, marginBottom: 2 }}
+              sx={{ m: 1, width: "80%", padding: 2, backgroundColor: theme.palette.primary.main, marginBottom: 2 }}
               type="submit"
             >
               Login
@@ -119,13 +119,13 @@ export default function Login() {
           </Link>
 
           {error && (
-            <Alert sx={{ width: "45%", m: 1 }} severity="error">
+            <Alert sx={{ width: "80%", m: 1 }} severity="error">
               {error}
             </Alert>
           )}
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", width: "40%", backgroundColor: "black" }}>
-          <CardMedia component="img" sx={{ width: "120%" }} image={logo} alt="Live from space album cover" />
+        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", width: { xs: "100%", md: "40%" }, backgroundColor: "black" }}>
+          <CardMedia component="img" sx={{ width: "100%", height: "100%", objectFit: "contain" }} image={logo} alt="Logo" />
         </Box>
       </Card>
     </Box>
