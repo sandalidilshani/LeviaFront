@@ -4,7 +4,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { Box, Card, CardMedia, IconButton, Typography, Alert, FilledInput, InputLabel, InputAdornment, FormControl, TextField, Button } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import {jwtDecode} from "jwt-decode"; // Correct import
+import { jwtDecode } from "jwt-decode";
 import logo from "./../../images/logo.png";
 import { useAuth } from "../../contexts/AuthContext";
 
@@ -55,14 +55,36 @@ export default function Login() {
   };
 
   return (
-    <Box sx={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
-      <Card sx={{ display: "flex", flexDirection: { xs: "column-reverse", md: "row" }, width: { xs: "90%", sm: "80%", md: "60%" }, height: { xs: "auto", md: "80vh" } }}>
-        <Box sx={{ display: "flex", flexDirection: "column", width: "100%", alignItems: "center", justifyContent: "center", backgroundColor: { xs: "white", md: "inherit" } }}>
+    <Box sx={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: theme.palette.background.default }}>
+      <Card sx={{ 
+        display: "flex", 
+        flexDirection: { xs: "column-reverse", md: "row" }, 
+        width: { xs: "90%", sm: "80%", md: "60%" }, 
+        height: { xs: "auto", md: "80vh" },
+        boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
+        transition: '0.3s',
+        '&:hover': {
+          boxShadow: '0 8px 16px 0 rgba(0,0,0,0.2)',
+        },
+      }}>
+        <Box sx={{ display: "flex", flexDirection: "column", width: "100%", alignItems: "center", justifyContent: "center", backgroundColor: { xs: "white", md: "inherit" }, padding: 4 }}>
           <form onSubmit={handleSubmit} style={{ width: "100%", display: "flex", flexDirection: "column", alignItems: "center" }}>
             <Button
-              variant="contained"
-              sx={{ m: 1, width: "80%", padding: 4, backgroundColor: theme.palette.primary.main, marginBottom: 2 }}
-              type="submit"
+              variant="outlined"
+              sx={{
+                m: 1,
+                width: "80%",
+                padding: 3,
+                border: '2px solid black', 
+                color: 'black',
+                marginBottom: 2,
+                transition: '0.3s',
+                '&:hover': {
+                  backgroundColor: 'black',
+                  color: 'white',
+                },
+              }}
+              type="button"
             >
               Login With PlazerUser
             </Button>
@@ -74,7 +96,16 @@ export default function Login() {
               id="uname"
               label="User Name"
               variant="filled"
-              sx={{ m: 1, width: "80%" }}
+              sx={{ 
+                m: 1, 
+                width: "80%",
+                '& .MuiFilledInput-root': {
+                  transition: '0.3s',
+                  '&:hover': {
+                    backgroundColor: theme.palette.action.hover,
+                  },
+                },
+              }}
               value={userName}
               onChange={(e) => setUserName(e.target.value)}
               error={!!error}
@@ -88,6 +119,12 @@ export default function Login() {
                 value={userpassword}
                 onChange={(e) => setUserPassword(e.target.value)}
                 error={!!error}
+                sx={{
+                  transition: '0.3s',
+                  '&:hover': {
+                    backgroundColor: theme.palette.action.hover,
+                  },
+                }}
                 endAdornment={
                   <InputAdornment position="end">
                     <IconButton
@@ -104,8 +141,20 @@ export default function Login() {
             </FormControl>
 
             <Button
-              variant="contained"
-              sx={{ m: 1, width: "80%", padding: 2, backgroundColor: theme.colors.primary, marginBottom: 2 }}
+              variant="outlined"
+              sx={{
+                m: 1,
+                width: "80%",
+                padding: 2,
+                border: '2px solid black', 
+                color: 'black',
+                marginBottom: 2,
+                transition: '0.3s',
+                '&:hover': {
+                  backgroundColor: 'black',
+                  color: 'white',
+                },
+              }}
               type="submit"
             >
               Login
@@ -113,18 +162,50 @@ export default function Login() {
           </form>
 
           <Link to="/signup" style={{ textDecoration: 'none' }}>
-            <Typography variant="subtitle1" color="primary" sx={{ cursor: 'pointer', marginBottom: 2 }}>
+            <Typography 
+              variant="subtitle1" 
+              color="primary" 
+              sx={{ 
+                cursor: 'pointer', 
+                marginBottom: 2,
+                transition: '0.3s',
+                '&:hover': {
+                  color: theme.palette.primary.dark,
+                  textDecoration: 'underline',
+                },
+              }}
+            >
               Don't have an account? Sign Up
             </Typography>
           </Link>
 
           {error && (
-            <Alert sx={{ width: "80%", m: 1 }} severity="error">
+            <Alert 
+              sx={{ 
+                width: "80%", 
+                m: 1,
+                transition: '0.3s',
+                '&:hover': {
+                  opacity: 0.9,
+                },
+              }} 
+              severity="error"
+            >
               {error}
             </Alert>
           )}
         </Box>
-        <Box sx={{ display: "flex", alignItems: "center", justifyContent: "center", width: { xs: "100%", md: "40%" }, backgroundColor: "black" }}>
+        <Box sx={{ 
+          display: "flex", 
+          alignItems: "center", 
+          justifyContent: "center", 
+          width: { xs: "100%", md: "40%" }, 
+          backgroundColor: "black",
+          transition: '0.3s',
+          '&:hover': {
+            opacity: 0.9,
+          },
+        }}>
           <CardMedia component="img" sx={{ width: "100%", height: "100%", objectFit: "contain" }} image={logo} alt="Logo" />
         </Box>
       </Card>
