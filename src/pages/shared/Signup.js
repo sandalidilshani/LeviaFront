@@ -13,7 +13,7 @@ import {
   CardMedia,
   Paper,
 } from '@mui/material';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import logo from "./../../images/logo.png";
 
 const RegistrationForm = () => {
@@ -25,7 +25,6 @@ const RegistrationForm = () => {
     AddressL1: '',
     AddressL2: '',
     AddressL3: '',
-  
     Email: '',
     gender: '',
     skills: '',
@@ -62,7 +61,7 @@ const RegistrationForm = () => {
 
   return (
     <Box sx={{ 
-      minHeight: "100vh", 
+      minHeight: "90vh", 
       display: "flex", 
       alignItems: "center", 
       justifyContent: "center", 
@@ -297,10 +296,7 @@ const RegistrationForm = () => {
           justifyContent: "center",
           width: "40%",
           backgroundColor: "black",
-          transition: '0.3s',
-          '&:hover': {
-            opacity: 0.9,
-          },
+          
         }}>
           <CardMedia component="img" sx={{ width: "100%", height: "100%", objectFit: "contain" }} image={logo} alt="Logo" />
         </Box>
