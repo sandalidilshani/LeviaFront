@@ -26,7 +26,7 @@ export default function Login() {
         return;
       }
 
-      const response = await axios.get("https://leviabackend-production.up.railway.app/auth/login/callback", {
+      const response = await axios.get("https://leviabackend-production-50e4.up.railway.app/auth/login/callback", {
         params: {
           token: token
         }
@@ -63,7 +63,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("https://leviabackend-production.up.railway.app/auth/login", {
+      const response = await axios.post("https://leviabackend-production-50e4.up.railway.app/auth/login", {
         userName,
         userpassword,
       });
@@ -71,7 +71,7 @@ export default function Login() {
       const accessToken = response.data.accesstoken;
 
       const decodedToken = jwtDecode(accessToken);
-      const userRole = decodedToken.role;
+      const userRole = decodedToken.roles[0];
 
       login(accessToken);
 

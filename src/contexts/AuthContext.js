@@ -11,7 +11,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState(null);
-  const [accessToken, setAccessToken] = useState(localStorage.getItem("accessToken") || null);
+  const [accessToken, setAccessToken] = useState(sessionStorage.getItem("accessToken") || null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
     try {
       const decodedToken = jwtDecode(token);
       setUser(decodedToken.sub);
-      const role = decodedToken.role;
+      const role = decodedToken.roles[0];
       console.log(role);
       if (role === 'HRManager') {
         setUserRole('HRManager');
@@ -28,6 +28,7 @@ export function AuthProvider({ children }) {
       }
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
       setAccessToken(token);
+      sessionStorage.setItem("accessToken", token);
     } catch (e) {
       console.error(e);
       setError("Failed to decode token.");
@@ -37,7 +38,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    const token = sessionStorage.getItem("token");
+    const token = sessionStorage.getItem("accessToken");
     if (token) {
       initializeAuth(token);
     } else {
@@ -46,7 +47,6 @@ export function AuthProvider({ children }) {
   }, [initializeAuth]);
 
   const login = (token) => {
-    sessionStorage.setItem("accessToken", token);
     initializeAuth(token);
   };
 
@@ -54,7 +54,7 @@ export function AuthProvider({ children }) {
     setUser(null);
     setUserRole(null);
     setAccessToken(null);
-    sessionStorage.removeItem("token");
+    sessionStorage.removeItem("accessToken");
     delete axios.defaults.headers.common["Authorization"];
   };
 

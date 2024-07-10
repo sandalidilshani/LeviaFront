@@ -27,7 +27,7 @@ export default function Leave() {
   useEffect(() => {
     const fetchUserLeaves = async () => {
       try {
-        const response = await axios.get(`http://localhost:3009/userleave/userleavecount/${userId}`);
+        const response = await axios.get(`https://leviabackend-production-50e4.up.railway.app/${userId}`);
         if (response.data) {
           setUserLeaveId(response.data.userLeaveId);
         }

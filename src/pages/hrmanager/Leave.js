@@ -38,7 +38,7 @@ export default function Profile() {
     const fetchLeaveDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3009/leaverequest/${leaveId}`
+          `https://leviabackend-production-50e4.up.railway.app/${leaveId}`
         );
         setLeaveDetails(response.data);
         setUser(response.data.userId.userId);

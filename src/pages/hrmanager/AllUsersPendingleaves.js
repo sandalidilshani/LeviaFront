@@ -48,7 +48,7 @@ export default function Pendingleaves() {
       .get(`http://localhost:3009/leaverequest/allpendingleaves`)
       .then((response) => {
         console.log(response.data);
-        setLeaverequest(response.data);
+        setLeaverequest(Array.isArray(response.data) ? response.data : []);
       });
   }, []);
 
@@ -72,7 +72,25 @@ export default function Pendingleaves() {
               justifyContent: "space-between",
               p: "10px",
             }}
-          >
+          >{
+             currentLeaves.length > 0 ?(
+              <Typography
+              variant="h6"
+              sx={{
+                color: "#0288D1",
+                fontFamily: "Roboto",
+                fontSize: "20px",
+                fontWeight: 800,
+                lineHeight: "26px",
+                letterSpacing: "0.46px",
+                p: "10px",
+              }}
+            >
+              No Approved or Rejected Leave Request Found
+            </Typography>
+            ):(
+
+           <>
             <Typography
               variant="h6"
               sx={{
@@ -154,6 +172,9 @@ export default function Pendingleaves() {
                 </TableBody>
               </Table>
             </TableContainer>
+            </>
+             )
+            }
             <Pagination
               count={Math.ceil(leaverequest.length / leavesPerPage)}
               page={currentPage}

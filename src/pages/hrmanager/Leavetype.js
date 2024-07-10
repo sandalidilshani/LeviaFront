@@ -48,7 +48,7 @@ export default function History() {
   useEffect(() => {
     const getAllLeaves = async () => {
       try {
-        const response = await axios.get("http://localhost:3009/leavetype/alltypes");
+        const response = await axios.get("https://leviabackend-production-50e4.up.railway.app/leavetype/alltypes");
         setLeaveTypes(response.data);
       } catch (error) {
         console.log(error);
@@ -67,7 +67,7 @@ export default function History() {
 
   const AddNewLeaveType=async ()=>{
     try{
-      await axios.post("http://localhost:3009/leavetype/addtype",{
+      await axios.post("https://leviabackend-production-50e4.up.railway.app",{
         type:newLeaveType,
         description:newLeaveTypeDescription
       })
