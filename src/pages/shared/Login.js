@@ -21,7 +21,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://leviabackend-production.up.railway.app/auth/login", {
+      const response = await axios.post("https://leviabackend-production.up.railway.app/auth/login", {
         userName,
         userpassword,
       });
