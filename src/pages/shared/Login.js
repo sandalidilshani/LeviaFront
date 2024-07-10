@@ -63,12 +63,12 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post("http://localhost:3009/auth/login", {
+      const response = await axios.post("https://leviabackend-production.up.railway.app/auth/login", {
         userName,
         userpassword,
       });
 
-      const accessToken = response.data.token;
+      const accessToken = response.data.accesstoken;
 
       const decodedToken = jwtDecode(accessToken);
       const userRole = decodedToken.role;

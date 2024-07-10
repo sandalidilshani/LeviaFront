@@ -45,7 +45,7 @@ const RegistrationForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3009/auth/register', formData);
+      const response = await axios.post('https://leviabackend-production.up.railway.app/auth/register', formData);
       console.log('User registered successfully!', response.data);
       navigate('/login');
     } catch (error) {
