@@ -10,7 +10,7 @@ export default function UserDetailsCard({userId}) {
   useEffect(() => {
     const fetchUserDetails = async () => {
       try {
-        const res = await axios.get(`https://leviabackend-production-50e4.up.railway.app/${userId}`);
+        const res = await axios.get(`https://leviabackend-production-50e4.up.railway.app/plazeruser/userdetailsbyuserid/${userId}`);
         console.log(res.data);
         setUserDetails(res.data);
       } catch (error) {

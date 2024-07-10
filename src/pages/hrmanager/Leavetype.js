@@ -38,6 +38,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 }));
 
 export default function History() {
+
   const theme = useTheme();
   const [LeaveTypes, setLeaveTypes] = React.useState([]);
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -50,6 +51,7 @@ export default function History() {
       try {
         const response = await axios.get("https://leviabackend-production-50e4.up.railway.app/leavetype/alltypes");
         setLeaveTypes(response.data);
+
       } catch (error) {
         console.log(error);
       }
@@ -67,12 +69,14 @@ export default function History() {
 
   const AddNewLeaveType=async ()=>{
     try{
-      await axios.post("https://leviabackend-production-50e4.up.railway.app",{
+      await axios.post("https://leviabackend-production-50e4.up.railway.app/leavetype/addtype",{
         type:newLeaveType,
         description:newLeaveTypeDescription
       })
-      setNewLeaveType(""); // Clear input fields after successful addition
+      setNewLeaveType("");
       setNewLeaveTypeDescription("");
+      alert("Add New Leave type you are responsible for this.");
+
     }
       catch(error){
         console.log(error);

@@ -20,7 +20,7 @@ const AlertButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const SnackbarAlert = ({ open, onClose }) => {
+const SnackbarAlert = ({ open, onClose,userId }) => {
   return (
     <Snackbar
       open={open}
@@ -52,7 +52,7 @@ const SnackbarAlert = ({ open, onClose }) => {
             color="inherit"
             size="medium"
             onClick={() => {
-              window.location.href = "/user/userpendingleaves";
+              window.location.href = `/user/pendingleaves/${userId}`;
             }}
           >
             See Pending Leaves

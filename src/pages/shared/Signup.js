@@ -44,10 +44,11 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log(formData)
     try {
       const response = await axios.post('https://leviabackend-production-50e4.up.railway.app/auth/register', formData);
       console.log('User registered successfully!', response.data);
-      navigate('/login');
+      navigate('/');
     } catch (error) {
       if (error.response) {
         console.log('Server responded with error:', error.response.data);
@@ -233,7 +234,6 @@ const RegistrationForm = () => {
                     onChange={handleChange}
                   >
                     <MenuItem value={'Member'}>Member</MenuItem>
-                    <MenuItem value={'OrganizationAdmin'}>Organization Admin</MenuItem>
                     <MenuItem value={'HRManager'}>HR Manager</MenuItem>
                   </Select>
                 </FormControl>

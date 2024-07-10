@@ -15,17 +15,17 @@ export default function Home() {
   const [plazeruserCount, setplazeruserCount] = useState(null);
   useEffect(() => {
     axios
-      .get(`https://leviabackend-production-50e4.up.railway.app`)
+      .get(`https://leviabackend-production-50e4.up.railway.app/leaverequest/pendingleavescount`)
       .then((response) => {
         console.log(response.data);
         setpendingLeavesCount(response.data);
       });
 
-    axios.get(`https://leviabackend-production-50e4.up.railway.app`).then((response) => {
+    axios.get(`https://leviabackend-production-50e4.up.railway.app/plazeruser/usercount`).then((response) => {
       console.log(response.data);
       setplazeruserCount(response.data);
     });
-    axios.get(`https://leviabackend-production-50e4.up.railway.app`).then((response) => {
+    axios.get(`https://leviabackend-production-50e4.up.railway.app/leavetype/count`).then((response) => {
       console.log(response.data);
       setleaveTypeCount(response.data);
     });

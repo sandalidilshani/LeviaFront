@@ -21,8 +21,8 @@ export default function UserCard({userId}) {
 
       try {
         const [pendingLeavesResponse, userLeavesResponse] = await Promise.all([
-          axios.get(`https://leviabackend-production-50e4.up.railway.app/${userId}`),
-          axios.get(`https://leviabackend-production-50e4.up.railway.app/${userId}`)
+          axios.get(`https://leviabackend-production-50e4.up.railway.app/leaverequest/userpendingleaves/${userId}`),
+          axios.get(`https://leviabackend-production-50e4.up.railway.app/userleave/userleavecount/${userId}`)
         ]);
 
         setPendingLeavesCount(pendingLeavesResponse.data);

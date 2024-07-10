@@ -46,13 +46,13 @@ export default function Leave() {
     event.preventDefault();
     try {
       if (userLeaveId) {
-        await axios.put(`http://localhost:3009/userleave/updateuserLeaves/${userId}`, {
+        await axios.put(`https://leviabackend-production-50e4.up.railway.app/userleave/updateuserLeaves/${userId}`, {
           totalLeaves,
           leavesValidUntil: dayjs(leaveValidPeriod).format('YYYY-MM-DD'),
         });
         console.log(totalLeaves,leaveValidPeriod);
       } else {
-        await axios.post(`http://localhost:3009/userleave/adduserLeaves/${userId}`, {
+        await axios.post(`https://leviabackend-production-50e4.up.railway.app/userleave/adduserLeaves/${userId}`, {
           totalLeaves,
           leavesValidUntil: dayjs(leaveValidPeriod).format('YYYY-MM-DD'),
         });

@@ -38,7 +38,7 @@ export default function Profile() {
     const fetchLeaveDetails = async () => {
       try {
         const response = await axios.get(
-          `https://leviabackend-production-50e4.up.railway.app/${leaveId}`
+          `https://leviabackend-production-50e4.up.railway.app/leaverequest/${leaveId}`
         );
         setLeaveDetails(response.data);
         setUser(response.data.userId.userId);
@@ -51,24 +51,26 @@ export default function Profile() {
   }, [leaveId]);
 
   const handleUpdateLeaveStatus = async (status) => {
-    setConfirmDialogOpen(false);
-    setLeaveStatusUpdate(true);
-    try {
-      await axios.put(
-        `http://localhost:3009/leaverequest/updateleavestatus/${leaveId}`,
-        {
-          newStatus: status,
-        }
-      );
-      alert(`Leave request ${status}d successfully!`);
-      navigate(-1);
-    } catch (error) {
-      console.log("Error updating leave status:", error);
-      alert("Failed to update leave status.");
-    } finally {
-      setLeaveStatusUpdate(false);
-    }
-  };
+  setConfirmDialogOpen(false);
+  setLeaveStatusUpdate(true);
+  try {
+    console.log(newStatus)
+    await axios.put(
+      `https://leviabackend-production-50e4.up.railway.app/leaverequest/updateleavestatus/${leaveId}`,
+      {
+        newStatus: status,
+      }
+    );
+    alert(`Leave request ${status}d successfully!`);
+    navigate(-1);
+  } catch (error) {
+    console.error("Error updating leave status:", error.response || error.message || error);
+    alert("Failed to update leave status. Please try again later.");
+  } finally {
+    setLeaveStatusUpdate(false);
+  }
+};
+
 
   const openConfirmDialog = (status) => {
     setNewStatus(status);

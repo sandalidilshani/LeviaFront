@@ -61,7 +61,7 @@ const History = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`https://leviabackend-production-50e4.up.railway.app`);
+        const response = await axios.get(`https://leviabackend-production-50e4.up.railway.app/leaverequest/approveandrejectleaves`);
         setLeaverequest(response.data);
       } catch (error) {
         console.log(error.message);

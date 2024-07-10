@@ -19,6 +19,7 @@ import AppsIcon from "@mui/icons-material/Apps";
 import BackupTableIcon from "@mui/icons-material/BackupTable";
 import MarkChatReadIcon from "@mui/icons-material/MarkChatRead";
 import EditIcon from "@mui/icons-material/Edit";
+import { useNavigate } from "react-router-dom";
 const userId=1;
 const StyledListItemButton = styled(ListItemButton, {
   shouldForwardProp: (prop) => prop !== 'active',
@@ -55,6 +56,7 @@ const SignOutButton = styled(ListItemButton)(({ theme }) => ({
 
 const Sidebar = () => {
   const [activePage, setActivePage] = useState("");
+  const navigate=useNavigate()
 
   useEffect(() => {
     // Set the active page based on the current URL
@@ -65,7 +67,12 @@ const Sidebar = () => {
   const handlePageChange = (page) => {
     setActivePage(page);
   };
+  const handleLogout = () => {
+    navigate('/')
+    Logout();
 
+    
+  };
   return (
     <Box
       flex={1}
@@ -153,11 +160,13 @@ const Sidebar = () => {
         </ListItem>
         <Divider color="#2196F3" sx={{ height: 2, width: "100%" }} />
         <ListItem>
-          <SignOutButton>
+          <SignOutButton   onClick={handleLogout}>
             <StyledListItemIcon>
+              
               <Logout />
             </StyledListItemIcon>
             <ListItemText primary="SignOut" />
+
           </SignOutButton>
         </ListItem>
       </List>

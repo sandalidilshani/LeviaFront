@@ -45,10 +45,9 @@ export default function Pendingleaves() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3009/leaverequest/allpendingleaves`)
+      .get(`https://leviabackend-production-50e4.up.railway.app/leaverequest/allpendingleaves`)
       .then((response) => {
-        console.log(response.data);
-        setLeaverequest(Array.isArray(response.data) ? response.data : []);
+        setLeaverequest(response.data);
       });
   }, []);
 
@@ -73,7 +72,7 @@ export default function Pendingleaves() {
               p: "10px",
             }}
           >{
-             currentLeaves.length > 0 ?(
+            leaverequest.length === 0 ?(
               <Typography
               variant="h6"
               sx={{
@@ -86,7 +85,7 @@ export default function Pendingleaves() {
                 p: "10px",
               }}
             >
-              No Approved or Rejected Leave Request Found
+              No Pendingleaves
             </Typography>
             ):(
 

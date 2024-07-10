@@ -19,6 +19,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import { Logout } from "@mui/icons-material";
 import theme from "../../theme";
 import { useAuth } from "../../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const StyledListItemButton = styled(ListItemButton, {
 
@@ -54,6 +55,8 @@ const SignOutButton = styled(ListItemButton)(({ theme }) => ({
 }));
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+
   const [activePage, setActivePage] = useState("");
 
   useEffect(() => {
@@ -67,6 +70,8 @@ const Sidebar = () => {
   };
   const { logout } = useAuth()
   const handleLogout = () => {
+    navigate('/')
+
     logout();
     
   };
@@ -137,7 +142,7 @@ const Sidebar = () => {
             <StyledListItemIcon>
               <Person />
             </StyledListItemIcon>
-            <ListItemText primary="User Leaves" />
+            <ListItemText primary="Add Leaves" />
           </StyledListItemButton>
         </ListItem>
         <ListItem>

@@ -34,7 +34,7 @@ export const LeaveRequest = () => {
   console.log("User ID:", user);
   useEffect(() => {
     axios
-      .get("http://localhost:3009/leavetype/alltypes")
+      .get("https://leviabackend-production-50e4.up.railway.app/leavetype/alltypes")
       .then((res) => {
         setLeaveTypes(res.data);
       })
@@ -70,7 +70,7 @@ export const LeaveRequest = () => {
     try {
       console.log("Leave request submitted:", requestData); // Log the submitted data
       const response = await axios.post(
-        `http://localhost:3009/leaverequest/addleave/${user}`,
+        `https://leviabackend-production-50e4.up.railway.app/leaverequest/addleave/${user}`,
         requestData
       );
       console.log("Leave request created:", response.data);
@@ -192,7 +192,7 @@ export const LeaveRequest = () => {
           </Button>
         </Box>
       
-      <SnackbarAlert open={openSnackbar} onClose={handleCloseSnackbar} />
+      <SnackbarAlert open={openSnackbar} onClose={handleCloseSnackbar} userId={user} />
     </Box>
   );
 };

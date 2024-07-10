@@ -45,7 +45,7 @@ export default function Pendingleaves() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3009/plazeruser`)
+      .get(`https://leviabackend-production-50e4.up.railway.app/plazeruser`)
       .then((response) => {
         console.log(response.data);
         setLeaverequest(response.data);
