@@ -63,7 +63,7 @@ export default function Home() {
            cardcolor={theme.colors.approveColor}
            title="Total Users:"
             count={plazeruserCount}
-            pagelink="/hr//users"
+            pagelink="/hr/users"
             cardavatar={<PeopleIcon />}
           />
           <LeaveCard

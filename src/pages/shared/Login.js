@@ -25,12 +25,8 @@ export default function Login() {
         setError("Token not found in session storage");
         return;
       }
-
-      const response = await axios.get("https://leviabackend-production-50e4.up.railway.app/auth/login/callback", {
-        params: {
-          token: token
-        }
-      });
+console.log(token)
+      const response = await axios.get(`https://leviabackend-production-50e4.up.railway.app/auth/callback?${token}`);
 
       const accessToken = response.data.token;
 
@@ -68,7 +64,7 @@ export default function Login() {
         userpassword,
       });
 
-      const accessToken = response.data.accesstoken;
+      const accessToken = response.data.token;
 
       const decodedToken = jwtDecode(accessToken);
       const userRole = decodedToken.roles[0];
