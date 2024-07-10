@@ -18,6 +18,48 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
 
+  const handlePlazerLogin = async () => {
+    try {
+      const token = sessionStorage.getItem("token");
+      if (!token) {
+        setError("Token not found in session storage");
+        return;
+      }
+
+      const response = await axios.get("http://localhost:3009/auth/login/callback", {
+        params: {
+          token: token
+        }
+      });
+
+      const accessToken = response.data.token;
+
+      const decodedToken = jwtDecode(accessToken);
+      const userRole = decodedToken.role;
+
+      login(accessToken);
+
+      if (userRole === 'HRManager') {
+        navigate("/hr/home/");
+      } else {
+        navigate("/user/home/");
+      }
+    } catch (error) {
+      if (error.response) {
+        if (error.response.data && error.response.data.message) {
+          setError(error.response.data.message);
+        } else if (error.response.data && error.response.data.errors) {
+          const errorMessages = error.response.data.errors.map(err => err.message).join(", ");
+          setError(errorMessages);
+        } else {
+          setError("An unexpected error occurred.");
+        }
+      } else {
+        setError("An error occurred. Please try again.");
+      }
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -26,7 +68,7 @@ export default function Login() {
         userpassword,
       });
 
-      const accessToken = response.data.accesstoken;
+      const accessToken = response.data.token;
 
       const decodedToken = jwtDecode(accessToken);
       const userRole = decodedToken.role;
@@ -84,7 +126,7 @@ export default function Login() {
                   color: 'white',
                 },
               }}
-              type="button"
+              onClick={handlePlazerLogin}
             >
               Login With PlazerUser
             </Button>

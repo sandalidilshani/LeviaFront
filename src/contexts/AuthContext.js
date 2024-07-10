@@ -37,7 +37,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
+    const token = sessionStorage.getItem("token");
     if (token) {
       initializeAuth(token);
     } else {
@@ -46,7 +46,7 @@ export function AuthProvider({ children }) {
   }, [initializeAuth]);
 
   const login = (token) => {
-    localStorage.setItem("accessToken", token);
+    sessionStorage.setItem("accessToken", token);
     initializeAuth(token);
   };
 
@@ -54,7 +54,7 @@ export function AuthProvider({ children }) {
     setUser(null);
     setUserRole(null);
     setAccessToken(null);
-    localStorage.removeItem("accessToken");
+    sessionStorage.removeItem("token");
     delete axios.defaults.headers.common["Authorization"];
   };
 
