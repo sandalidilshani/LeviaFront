@@ -26,7 +26,7 @@ export default function Login() {
         return;
       }
 
-      const response = await axios.get("http://localhost:3009/auth/login/callback", {
+      const response = await axios.get("https://leviabackend-production.up.railway.app/auth/login/callback", {
         params: {
           token: token
         }
