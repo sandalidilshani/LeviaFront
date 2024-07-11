@@ -63,13 +63,14 @@ console.log(token)
         userName,
         userpassword,
       });
-
-      const accessToken = response.data.token;
-
-      const decodedToken = jwtDecode(accessToken);
+      console.log(response.data)
+      const Token = response.data.accesstoken;
+      console.log(response.data.accesstoken)
+      const decodedToken = jwtDecode(Token);
+      console.log(decodedToken.roles[0])
       const userRole = decodedToken.roles[0];
+      login(Token);
 
-      login(accessToken);
 
       if (userRole === 'HRManager') {
         navigate("/hr/home/");
@@ -90,6 +91,7 @@ console.log(token)
         setError("An error occurred. Please try again.");
       }
     }
+
   };
 
   return (

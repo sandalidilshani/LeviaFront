@@ -11,7 +11,7 @@ export function useAuth() {
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [userRole, setUserRole] = useState(null);
-  const [accessToken, setAccessToken] = useState(sessionStorage.getItem("accessToken") || null);
+  const [Token, setToken] = useState(sessionStorage.getItem("Token") || null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -27,8 +27,8 @@ export function AuthProvider({ children }) {
         setUserRole('User');
       }
       axios.defaults.headers.common["Authorization"] = "Bearer " + token;
-      setAccessToken(token);
-      sessionStorage.setItem("accessToken", token);
+      setToken(token);
+      sessionStorage.setItem("token", token);
     } catch (e) {
       console.error(e);
       setError("Failed to decode token.");
@@ -38,7 +38,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   useEffect(() => {
-    const token = sessionStorage.getItem("accessToken");
+    const token = sessionStorage.getItem("token");
     if (token) {
       initializeAuth(token);
     } else {
@@ -53,14 +53,14 @@ export function AuthProvider({ children }) {
   const logout = () => {
     setUser(null);
     setUserRole(null);
-    setAccessToken(null);
-    sessionStorage.removeItem("accessToken");
+    setToken(null);
+    sessionStorage.removeItem("token");
     delete axios.defaults.headers.common["Authorization"];
   };
 
   const value = {
     user,
-    accessToken,
+    Token,
     userRole,
     loading,
     error,
