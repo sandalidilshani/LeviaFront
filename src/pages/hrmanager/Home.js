@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { Box, useMediaQuery } from "@mui/material";
+import { Box, Paper, Typography, useMediaQuery } from "@mui/material";
 import LeaveCard from "../../components/shared/LeaveDetailCard";
 import { useTheme } from "@mui/material/styles";
 import PeopleIcon from "@mui/icons-material/People";
@@ -9,7 +9,7 @@ import ResetTvIcon from "@mui/icons-material/ResetTv";
 import QuestionAnswerIcon from "@mui/icons-material/QuestionAnswer";
 export default function Home() {
   const theme = useTheme();
-  const isSmallScreen = useMediaQuery(theme.breakpoints.down('sm'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down('md'));
   const [pendingLeavesCount, setpendingLeavesCount] = useState(null);
   const [leaveTypeCount, setleaveTypeCount] = useState(null);
   const [plazeruserCount, setplazeruserCount] = useState(null);
@@ -41,7 +41,7 @@ export default function Home() {
           alignItems: "flex-start",
         }}
       >
-        <Box sx={{ display: "flex", flexDirection: "row", gap: "20px" }}>
+        <Box sx={{ display: "flex", flexDirection:isSmallScreen?"column" :"row", gap: "20px"  }}>
           <LeaveCard
            sx={{width : "16.5rem"}}
             cardcolor={theme.colors.pendingColor}
@@ -85,7 +85,38 @@ export default function Home() {
           justifyContent: "space-around",
         }}
       >
-        hi
+      <Paper
+  elevation={4}
+  sx={{
+    padding: "30px 90px 50px 90px",
+    marginBottom: "20px",
+    width: '50%',
+    backgroundColor: theme.colors.secondry,
+    borderRadius: '10px',
+    boxShadow: '0 8px 8px rgba(0,0,0,0.2)'
+  }}
+>
+  <Typography variant="body1" paragraph sx={{ fontWeight: 'bold', color: theme.colors.primary }}>
+    Welcome to the HR dashboard for our Leave Management System. Here you can oversee and manage employee leave requests efficiently.
+  </Typography>
+  
+  <Typography variant="h6" gutterBottom sx={{ borderBottom: `2px solid ${theme.colors.primary}` }}>
+    Key Features:
+  </Typography>
+  
+  <ul style={{ listStyleType: 'disc', paddingLeft: '20px', lineHeight: '1.6' }}>
+    <li>View and process pending leave requests</li>
+    <li>Monitor leave balances for all employees</li>
+    <li>Generate reports on leave trends and patterns</li>
+    <li>Manage different leave types and policies</li>
+    <li>Overview of total workforce and leave statistics</li>
+  </ul>
+  
+  <Typography variant="body2" sx={{ marginTop: 2, fontStyle: 'italic' }}>
+    For any system-related issues or policy questions, please contact the IT department or senior management.
+  </Typography>
+</Paper>
+
       </Box>
     </Box>
   );
