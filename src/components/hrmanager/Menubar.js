@@ -68,11 +68,11 @@ const Sidebar = () => {
   const handlePageChange = (page) => {
     setActivePage(page);
   };
-  const { logout } = useAuth()
+  const { SignOut } = useAuth()
   const handleLogout = () => {
     navigate('/')
 
-    logout();
+    SignOut();
     
   };
   return (

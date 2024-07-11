@@ -25,15 +25,14 @@ export default function Login() {
         setError("Token not found in session storage");
         return;
       }
-console.log(token)
-      const response = await axios.get(`https://leviabackend-production-50e4.up.railway.app/auth/callback?${token}`);
-
-      const accessToken = response.data.token;
-
-      const decodedToken = jwtDecode(accessToken);
+      console.log(token)
+      const response = await axios.get(`https://leviabackend-production-50e4.up.railway.app/auth/callback?token=${token}`);
+      console.log(response.data)
+      const decodedToken = jwtDecode(token);
+      console.log(decodedToken)
       const userRole = decodedToken.role;
 
-      login(accessToken);
+      login(token);
 
       if (userRole === 'HRManager') {
         navigate("/hr/home/");
@@ -64,8 +63,8 @@ console.log(token)
         userpassword,
       });
       console.log(response.data)
-      const Token = response.data.accesstoken;
-      console.log(response.data.accesstoken)
+      const Token = response.data.token;
+      console.log(response.data.token)
       const decodedToken = jwtDecode(Token);
       console.log(decodedToken.roles[0])
       const userRole = decodedToken.roles[0];
@@ -96,10 +95,10 @@ console.log(token)
 
   return (
     <Box sx={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: theme.palette.background.default }}>
-      <Card sx={{ 
-        display: "flex", 
-        flexDirection: { xs: "column-reverse", md: "row" }, 
-        width: { xs: "90%", sm: "80%", md: "60%" }, 
+      <Card sx={{
+        display: "flex",
+        flexDirection: { xs: "column-reverse", md: "row" },
+        width: { xs: "90%", sm: "80%", md: "60%" },
         height: { xs: "auto", md: "80vh" },
         boxShadow: '0 4px 8px 0 rgba(0,0,0,0.2)',
         transition: '0.3s',
@@ -115,7 +114,7 @@ console.log(token)
                 m: 1,
                 width: "80%",
                 padding: 3,
-                border: '2px solid black', 
+                border: '2px solid black',
                 color: 'black',
                 marginBottom: 2,
                 transition: '0.3s',
@@ -136,8 +135,8 @@ console.log(token)
               id="uname"
               label="User Name"
               variant="filled"
-              sx={{ 
-                m: 1, 
+              sx={{
+                m: 1,
                 width: "80%",
                 '& .MuiFilledInput-root': {
                   transition: '0.3s',
@@ -186,7 +185,7 @@ console.log(token)
                 m: 1,
                 width: "80%",
                 padding: 2,
-                border: '2px solid black', 
+                border: '2px solid black',
                 color: 'black',
                 marginBottom: 2,
                 transition: '0.3s',
@@ -202,11 +201,11 @@ console.log(token)
           </form>
 
           <Link to="/signup" style={{ textDecoration: 'none' }}>
-            <Typography 
-              variant="subtitle1" 
-              color="primary" 
-              sx={{ 
-                cursor: 'pointer', 
+            <Typography
+              variant="subtitle1"
+              color="primary"
+              sx={{
+                cursor: 'pointer',
                 marginBottom: 2,
                 transition: '0.3s',
                 '&:hover': {
@@ -220,26 +219,26 @@ console.log(token)
           </Link>
 
           {error && (
-            <Alert 
-              sx={{ 
-                width: "80%", 
+            <Alert
+              sx={{
+                width: "80%",
                 m: 1,
                 transition: '0.3s',
                 '&:hover': {
                   opacity: 0.9,
                 },
-              }} 
+              }}
               severity="error"
             >
               {error}
             </Alert>
           )}
         </Box>
-        <Box sx={{ 
-          display: "flex", 
-          alignItems: "center", 
-          justifyContent: "center", 
-          width: { xs: "100%", md: "40%" }, 
+        <Box sx={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          width: { xs: "100%", md: "40%" },
           backgroundColor: "black",
           transition: '0.3s',
           '&:hover': {

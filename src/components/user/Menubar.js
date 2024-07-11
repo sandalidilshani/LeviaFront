@@ -20,6 +20,7 @@ import BackupTableIcon from "@mui/icons-material/BackupTable";
 import MarkChatReadIcon from "@mui/icons-material/MarkChatRead";
 import EditIcon from "@mui/icons-material/Edit";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 const userId=1;
 const StyledListItemButton = styled(ListItemButton, {
   shouldForwardProp: (prop) => prop !== 'active',
@@ -67,9 +68,10 @@ const Sidebar = () => {
   const handlePageChange = (page) => {
     setActivePage(page);
   };
+  const{SignOut}=useAuth()
   const handleLogout = () => {
     navigate('/')
-    Logout();
+    SignOut()
 
     
   };

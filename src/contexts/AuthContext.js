@@ -32,7 +32,7 @@ export function AuthProvider({ children }) {
     } catch (e) {
       console.error(e);
       setError("Failed to decode token.");
-      logout();
+      SignOut();
     }
     setLoading(false);
   }, []);
@@ -50,11 +50,11 @@ export function AuthProvider({ children }) {
     initializeAuth(token);
   };
 
-  const logout = () => {
+  const SignOut = () => {
     setUser(null);
     setUserRole(null);
     setToken(null);
-    sessionStorage.removeItem("token");
+    sessionStorage.clear("token");
     delete axios.defaults.headers.common["Authorization"];
   };
 
@@ -65,7 +65,7 @@ export function AuthProvider({ children }) {
     loading,
     error,
     login,
-    logout,
+    SignOut,
   };
 
   return (
