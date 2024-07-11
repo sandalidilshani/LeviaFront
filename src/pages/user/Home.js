@@ -2,67 +2,69 @@ import React from "react";
 import { Box, Paper, Typography, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import UserCard from "../../components/user/UserCard";
+import { useAuth } from "../../contexts/AuthContext.js";
 
 export default function Home() {
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm"));
-  //decode token for user id for context
+  const { user } = useAuth();
 
+  const paperStyle = {
+    padding: "30px",
+    marginBottom: "20px",
+    width: "70%",
+    backgroundColor: theme.colors.secondary,
+    borderRadius: "15px",
+    boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
+    
+  };
+
+  const titleStyle = {
+    fontWeight: "bold",
+    color: theme.colors.primary,
+    marginBottom: "15px",
+    borderBottom: `2px solid ${theme.colors.primary}`,
+    paddingBottom: "10px",
+  };
 
   return (
     <Box
       sx={{
         display: "flex",
-        flexDirection: isSmallScreen ? "row" : "column",
-        alignItems: "center",
-        gap: '30px',
-        justifyContent: "space-around",
-
+        flexDirection: isSmallScreen ? "column" : "row",
+        alignItems: "space-between  ",
+        gap: "30px",
+        height:'80%'
       }}
     >
-
-      <UserCard />
-      <Box
-        sx={{
-          display: "flex",
-          flex: "1",
-          mb: isSmallScreen ? 2 : 0,
-          justifyContent: "space-around",
-        }}
-      >      <Paper
-        elevation={4}
-        sx={{
-          padding: "30px 90px 50px 90px",
-          marginBottom: "20px",
-          
-          width: '80%',
-          backgroundColor: theme.colors.secondry,
-          borderRadius: '10px',
-          boxShadow: '0 8px 8px rgba(0,0,0,0.2)'
-        }}
-      >
-        <Typography variant="body1" paragraph sx={{ fontWeight: 'bold', color: theme.colors.primary }}>
-          Welcome to the Levia
-        </Typography>
-
-        <Typography variant="h6" gutterBottom sx={{ borderBottom: `2px solid ${theme.colors.primary}` }}>
-        Here's what you can do:
-        </Typography>
-
-        <ul style={{ listStyleType: 'disc', paddingLeft: '20px', lineHeight: '1.6' }}>
-        <li>View your pending leaves</li>
-        <li>Request new leaves</li>
-        <li>Check your leave history</li>
-        <li>Explore different leave types available</li>
-        <li>Check your available and reject leave count</li>
-        </ul>
-
-        <Typography variant="body2" sx={{ marginTop: 2, fontStyle: 'italic' }}>
-        Need help? Contact HR for assistance.
-        </Typography>
-      </Paper>
+      <Box sx={{ flex: "0 0 300px", marginBottom: isSmallScreen ? "20px" : 0 }}>
+        <UserCard userid={user} />
       </Box>
-      
+      <Box sx={{ flex: 1, display: "flex", flexDirection: "column", gap: "30px" }}>
+        <Paper elevation={4} sx={paperStyle}>
+          <Typography variant="h5" sx={titleStyle}>
+            Welcome to Levia
+          </Typography>
+          <Typography variant="body1" paragraph>
+            If you are a new user, please wait for HR approval. HR will add your leave counts once your account is set up.
+          </Typography>
+        </Paper>
+        <Paper elevation={4} sx={paperStyle}>
+          <Typography variant="h5" sx={titleStyle}>
+            Here's what you can do:
+          </Typography>
+          <ul style={{ paddingLeft: "25px", lineHeight: "1.8" }}>
+            <li>View your pending leaves</li>
+            <li>Request new leaves</li>
+            <li>Check your leave history</li>
+            <li>Explore different leave types available</li>
+            <li>Check your available and rejected leave count</li>
+          </ul>
+          <Typography variant="body2" sx={{ marginTop: "20px", fontStyle: "italic", color: theme.colors.primary }}>
+            Need help? Contact HR for assistance.
+          </Typography>
+        </Paper>
+      </Box>
     </Box>
-  )
+  );
 }

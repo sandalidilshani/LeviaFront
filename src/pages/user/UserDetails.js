@@ -7,7 +7,7 @@ import { useAuth } from "../../contexts/AuthContext";
 
 function UserDetails() {
   const { user } = useAuth();
-
+console.log("user auth",user)
   return (
     <Box sx={{display:'flex', flexDirection:'row', justifyContent:'center',pl:5,gap:5 }}>
       <Box sx={{display:'flex', flex:'1',height:'80%'}}>

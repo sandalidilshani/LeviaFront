@@ -46,7 +46,7 @@ export default function Pendingleaves() {
       .get(`http://localhost:3009/leaverequest/pendingleaves/${user}`)
       .then((response) => {
         console.log(response.data);
-        setLeaverequest(response.data);
+        setLeaverequest(Array.isArray(response.data) ? response.data : []);
       });
   }, [user]);
 
@@ -57,19 +57,17 @@ export default function Pendingleaves() {
   const indexOfLastLeave = currentPage * leavesPerPage;
   const indexOfFirstLeave = indexOfLastLeave - leavesPerPage;
   const currentLeaves = leaverequest.slice(indexOfFirstLeave, indexOfLastLeave);
-;
-
   return (
     <ThemeProvider theme={theme}>
-      
-        <div>
-          <Box
-            sx={{
-              flex: 5,
-              justifyContent: "space-between",
-              p: "10px",
-            }}
-          >
+      <div>
+        <Box
+          sx={{
+            flex: 5,
+            justifyContent: "space-between",
+            p: "10px",
+          }}
+        >
+          {leaverequest.length === 0 ? (
             <Typography
               variant="h6"
               sx={{
@@ -82,64 +80,79 @@ export default function Pendingleaves() {
                 p: "10px",
               }}
             >
-              *Your leave Request for response
+              There are no leave requests awaiting approval from HR.
             </Typography>
-            <TableContainer component={Paper}>
-              <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                <TableHead>
-                  <TableRow>
-                    <StyledTableCell>Leave Id </StyledTableCell>
-                    <StyledTableCell>Leave Reason </StyledTableCell>
-                    <StyledTableCell>Leave Type </StyledTableCell>
-                    <StyledTableCell>Leave Type Details </StyledTableCell>
-                    <StyledTableCell >leaveStart</StyledTableCell>
-                    <StyledTableCell >leaveEnd</StyledTableCell>
-                    <StyledTableCell >LeaveRequest Date</StyledTableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {currentLeaves.map((request) => (
-                    <StyledTableRow key={request.leaveId}>
-                      <TableCell component="th" scope="row">
-                        {request.leaveId}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        {request.leaveReason}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        
-                        {request.leaveTypeid.type}
-                      </TableCell>
-                      <TableCell component="th" scope="row">
-                        
-                        {request.leaveTypeid.description}
-                      </TableCell>
-                      <TableCell align="center">{request.leaveStart}</TableCell>
-                      <TableCell align="center">{request.leaveEnd}</TableCell>
-                      <TableCell align="center">
-                        {request.requestDate}
-                      </TableCell>
-                      
-                      
-                    </StyledTableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </TableContainer>
-            <Pagination
-              count={Math.ceil(leaverequest.length / leavesPerPage)}
-              page={currentPage}
-              onChange={handlePageChange}
-              color="primary"
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                marginTop: "20px",
-              }}
-            />
-          </Box>
-        </div>
-      
+          ) : (
+            <>
+              <Typography
+                variant="h6"
+                sx={{
+                  color: "#0288D1",
+                  fontFamily: "Roboto",
+                  fontSize: "20px",
+                  fontWeight: 800,
+                  lineHeight: "26px",
+                  letterSpacing: "0.46px",
+                  p: "10px",
+                }}
+              >
+                *Your leave Request for response
+              </Typography>
+              <TableContainer component={Paper}>
+                <Table sx={{ minWidth: 700 }} aria-label="customized table">
+                  <TableHead>
+                    <TableRow>
+                      <StyledTableCell>Leave Id </StyledTableCell>
+                      <StyledTableCell>Leave Reason </StyledTableCell>
+                      <StyledTableCell>Leave Type </StyledTableCell>
+                      <StyledTableCell>Leave Type Details </StyledTableCell>
+                      <StyledTableCell>leaveStart</StyledTableCell>
+                      <StyledTableCell>leaveEnd</StyledTableCell>
+                      <StyledTableCell>LeaveRequest Date</StyledTableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {currentLeaves.map((request) => (
+                      <StyledTableRow key={request.leaveId}>
+                        <TableCell component="th" scope="row">
+                          {request.leaveId}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {request.leaveReason}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {request.leaveTypeid.type}
+                        </TableCell>
+                        <TableCell component="th" scope="row">
+                          {request.leaveTypeid.description}
+                        </TableCell>
+                        <TableCell align="center">
+                          {request.leaveStart}
+                        </TableCell>
+                        <TableCell align="center">{request.leaveEnd}</TableCell>
+                        <TableCell align="center">
+                          {request.requestDate}
+                        </TableCell>
+                      </StyledTableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </>
+          )}
+          <Pagination
+            count={Math.ceil(leaverequest.length / leavesPerPage)}
+            page={currentPage}
+            onChange={handlePageChange}
+            color="primary"
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              marginTop: "20px",
+            }}
+          />
+        </Box>
+      </div>
     </ThemeProvider>
   );
 }

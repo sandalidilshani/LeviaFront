@@ -65,7 +65,7 @@ export const LeaveRequest = () => {
       leaveType: selectedType,
       leaveReason: leaveReason,
       requestDate: new Date().toISOString().split("T")[0],
-      userId: user,
+      userId: parseInt(user),
     };
     try {
       console.log("Leave request submitted:", requestData); // Log the submitted data

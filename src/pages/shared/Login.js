@@ -10,6 +10,7 @@ import { useAuth } from "../../contexts/AuthContext";
 
 export default function Login() {
   const { login } = useAuth();
+  const { loginWithPlazer } = useAuth()
   const theme = useTheme();
   const navigate = useNavigate();
 
@@ -21,24 +22,26 @@ export default function Login() {
   const handlePlazerLogin = async () => {
     try {
       const token = sessionStorage.getItem("token");
+      console.log(token)
       if (!token) {
         setError("Token not found in session storage");
         return;
       }
-      console.log(token)
       const response = await axios.get(`https://leviabackend-production-50e4.up.railway.app/auth/callback?token=${token}`);
-      console.log(response.data)
+      console.log(response.data);
+      const user = response.data;
       const decodedToken = jwtDecode(token);
-      console.log(decodedToken)
-      const userRole = decodedToken.role;
 
-      login(token);
+      const userRole = decodedToken.roles[0];
+      console.log(userRole)
+      loginWithPlazer(token, user);
 
       if (userRole === 'HRManager') {
         navigate("/hr/home/");
       } else {
         navigate("/user/home/");
       }
+
     } catch (error) {
       if (error.response) {
         if (error.response.data && error.response.data.message) {
@@ -62,14 +65,11 @@ export default function Login() {
         userName,
         userpassword,
       });
-      console.log(response.data)
-      const Token = response.data.token;
-      console.log(response.data.token)
-      const decodedToken = jwtDecode(Token);
-      console.log(decodedToken.roles[0])
+      console.log(response.data);
+      const token = response.data.token;
+      const decodedToken = jwtDecode(token);
       const userRole = decodedToken.roles[0];
-      login(Token);
-
+      login(token);
 
       if (userRole === 'HRManager') {
         navigate("/hr/home/");
@@ -90,9 +90,7 @@ export default function Login() {
         setError("An error occurred. Please try again.");
       }
     }
-
   };
-
   return (
     <Box sx={{ height: "100vh", display: "flex", alignItems: "center", justifyContent: "center", backgroundColor: theme.palette.background.default }}>
       <Card sx={{

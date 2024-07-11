@@ -3,7 +3,7 @@ import { Navigate ,Outlet} from 'react-router-dom';
 import { useAuth } from './AuthContext';
 
 const ProtectedRoute = ({ children, allowedRoles }) => {
-  const { userRole, loading,Token} = useAuth();
+  const { userRole, loading,token} = useAuth();
   console.log(userRole)
   console.log(allowedRoles)
 
@@ -11,7 +11,8 @@ const ProtectedRoute = ({ children, allowedRoles }) => {
     return <div>Loading...</div>;
   }
 
-  if (!Token) {
+  if (!token) {
+    console.log('no token')
     return <Navigate to="/" />;
   }
 
