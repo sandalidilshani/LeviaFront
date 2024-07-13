@@ -93,7 +93,7 @@ export const LeaveRequest = () => {
       alignItems: isSmallScreen ? "center" : "space-between",
     }} >
       <Box sx={{ display:'flex', flexDirection:'row', gap:'5px',flex:2}}>
-      <UserCards userId={user} />
+      <UserCards  />
 
       </Box>
         <Box
