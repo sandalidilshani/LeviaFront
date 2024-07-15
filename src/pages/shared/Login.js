@@ -21,10 +21,12 @@ export default function Login() {
 
   const handlePlazerLogin = async () => {
     try {
-      const token = sessionStorage.getItem("token");
+
+      const UrlParam = new URLSearchParams(window.location.search);
+      const token=UrlParam.get('token')
       console.log(token)
       if (!token) {
-        setError("Token not found in session storage");
+        setError("Token not found ");
         return;
       }
       const response = await axios.get(`https://leviabackend-production-50e4.up.railway.app/auth/callback?token=${token}`);
