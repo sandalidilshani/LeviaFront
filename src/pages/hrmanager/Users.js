@@ -86,7 +86,7 @@ export default function Pendingleaves() {
                 p: "10px",
               }}
             >
-              *Select Leave for More details
+              *Add Leave Counts per period
             </Typography>
             <TableContainer component={Paper}>
               <Table sx={{ minWidth: 700 }} aria-label="customized table">
