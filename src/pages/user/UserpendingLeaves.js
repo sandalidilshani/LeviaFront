@@ -43,7 +43,7 @@ export default function Pendingleaves() {
   const leavesPerPage = 5;
   useEffect(() => {
     axios
-      .get(`http://localhost:3009/leaverequest/pendingleaves/${user}`)
+      .get(`https://leviabackend-production-50e4.up.railway.app/leaverequest/pendingleaves/${user}`)
       .then((response) => {
         console.log(response.data);
         setLeaverequest(Array.isArray(response.data) ? response.data : []);

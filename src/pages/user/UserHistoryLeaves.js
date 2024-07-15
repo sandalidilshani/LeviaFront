@@ -43,7 +43,7 @@ export default function UserHistoryLeaves() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3009/leaverequest/approveleaves/${user}`)
+      .get(`https://leviabackend-production-50e4.up.railway.app/leaverequest/approveleaves/${user}`)
       .then((response) => {
         console.log(response.data);
         setApprovedLeaves(Array.isArray(response.data) ? response.data : []);
@@ -56,7 +56,7 @@ export default function UserHistoryLeaves() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3009/leaverequest/rejectleaves/${user}`)
+      .get(`https://leviabackend-production-50e4.up.railway.app/rejectleaves/${user}`)
       .then((response) => {
         console.log(response.data);
         setRejectedLeaves(Array.isArray(response.data) ? response.data : []);
