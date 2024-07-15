@@ -17,6 +17,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from "dayjs";
 import theme from "../../theme";
+import UserCard from "../../components/shared/UserCards";
 
 export default function Leave() {
   const { userId } = useParams();
@@ -50,13 +51,13 @@ export default function Leave() {
           totalLeaves,
           leavesValidUntil: dayjs(leaveValidPeriod).format('YYYY-MM-DD'),
         });
-        console.log(totalLeaves,leaveValidPeriod);
+        console.log(totalLeaves, leaveValidPeriod);
       } else {
         await axios.post(`https://leviabackend-production-50e4.up.railway.app/userleave/adduserLeaves/${userId}`, {
           totalLeaves,
           leavesValidUntil: dayjs(leaveValidPeriod).format('YYYY-MM-DD'),
         });
-        console.log(totalLeaves,leaveValidPeriod);
+        console.log(totalLeaves, leaveValidPeriod);
 
       }
       alert("User's total leaves updated successfully!");
@@ -67,66 +68,72 @@ export default function Leave() {
   };
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", gap: 2, p: 5, justifyContent: 'center' }}>
-            <Typography variant="h5" sx={{ color: theme.colors.primary, fontWeight: 600, mt: 2 }}>
-            Add User Total Leaves </Typography>
+    <Box sx={{ display: "flex", flexDirection: "column", gap: 1, p: 2, justifyContent: 'center' }}>
+      <Typography variant="h5" sx={{ color: theme.colors.primary, fontWeight: 600, mt: 2 }}>
+        Add User Total Leaves </Typography>
+      <Box>
+        <UserCard userId={userId} />
+      </Box>
+      <Box>
 
-      <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
-        <Box sx={{ flex: 1 }}>
-          <UserDetailsCard userId={userId} />
+        <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
+          <Box sx={{ flex: 1 }}>
+            <UserDetailsCard userId={userId} />
+          </Box>
+
+          <Card sx={{ flex: 1, p: 2 }}>
+            <CardContent>
+              <Typography variant="h6" sx={{ color: theme.colors.primary, fontWeight: 800, mb: 2 }}>
+                Update Total Leaves
+              </Typography>
+              <form onSubmit={handleSubmit}>
+                <Grid container spacing={2}>
+                  <Grid item xs={12}>
+                    <TextField
+                      fullWidth
+                      label="Total Leaves"
+                      type="number"
+                      value={totalLeaves}
+                      onChange={(e) => setTotalLeaves(Number(e.target.value))}
+                      required
+                    />
+                  </Grid>
+
+                  <Grid item xs={12}>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <DemoContainer components={['DatePicker']}>
+
+                        <DatePicker
+                          label="Leaves Valid Until"
+                          value={leaveValidPeriod}
+                          onChange={setLeaveValidPeriod}
+                        />
+                      </DemoContainer>
+
+                    </LocalizationProvider>
+
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Button
+                      type="submit"
+                      variant="contained"
+                      color="primary"
+                      fullWidth
+                    >
+                      Update Total Leaves
+                    </Button>
+                  </Grid>
+                </Grid>
+              </form>
+            </CardContent>
+          </Card>
         </Box>
 
-        <Card sx={{ flex: 1, p: 2 }}>
-          <CardContent>
-            <Typography variant="h6" sx={{ color: theme.colors.primary, fontWeight: 800, mb: 2 }}>
-              Update Total Leaves
-            </Typography>
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={2}>
-                <Grid item xs={12}>
-                  <TextField
-                    fullWidth
-                    label="Total Leaves"
-                    type="number"
-                    value={totalLeaves}
-                    onChange={(e) => setTotalLeaves(Number(e.target.value))}
-                    required
-                  />
-                </Grid>
-                
-                <Grid item xs={12}>
-                  <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={['DatePicker']}>
-
-                      <DatePicker
-                        label="Leaves Valid Until"
-                        value={leaveValidPeriod}
-                        onChange={setLeaveValidPeriod}
-                      />
-                    </DemoContainer>
-
-                  </LocalizationProvider>
-
-                </Grid>
-                <Grid item xs={12}>
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    color="primary"
-                    fullWidth
-                  >
-                    Update Total Leaves
-                  </Button>
-                </Grid>
-              </Grid>
-            </form>
-          </CardContent>
-        </Card>
+        <Typography variant="body1" sx={{ color: theme.colors.red, fontWeight: 600, mt: 2 }}>
+          You are responsible for adding and updating user's total leaves.
+        </Typography>
       </Box>
-
-      <Typography variant="body1" sx={{ color: theme.colors.red, fontWeight: 600, mt: 2 }}>
-        You are responsible for adding and updating user's total leaves.
-      </Typography>
     </Box>
+
   );
 }

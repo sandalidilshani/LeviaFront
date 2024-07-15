@@ -82,13 +82,13 @@ export default function Profile() {
   }
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
-      <Box sx={{ display: "flex", flexDirection: "row" }}>
-        <Box sx={{ display: "flex", flexDirection: "column", flex: 1 }}>
+    <Box sx={{ display: "flex", flexDirection: "column"}}>
+      <Box sx={{ display: "flex", flexDirection: "row",gap:2 , }}>
+        <Box sx={{ display: "flex", flexDirection: "column", flex: 8 }}>
           <UserDetailsCard userId={user} />
         </Box>
 
-        <Box sx={{ display: "flex", flex: 5, width: "60%" }}>
+        <Box sx={{ display: "flex", flex: 4, width: "60%" }}>
           <Card sx={{ p: 2, width: "100%", mx: "auto" }}>
             <CardContent>
               <Typography variant="h5" fontWeight="bold" gutterBottom>

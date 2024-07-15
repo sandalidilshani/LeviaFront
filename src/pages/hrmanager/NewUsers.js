@@ -36,28 +36,27 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
   },
 }));
 
-export default function UsersWithLeaves() {
+export default function UsersWithoutLeaves() {
   const theme = useTheme();
-  const [usersWithLeaves, setUsersWithLeaves] = useState([]);
+  const [usersWithoutLeaves, setUsersWithoutLeaves] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const leavesPerPage = 5;
 
   useEffect(() => {
     axios
-      .get(`https://leviabackend-production-50e4.up.railway.app/userleave/allusers`)
+      .get(`https://leviabackend-production-50e4.up.railway.app/plazeruser/userswithoutleves`)
       .then((response) => {
-        setUsersWithLeaves(response.data);
-
+        setUsersWithoutLeaves(response.data);
       });
   }, []);
 
   const handlePageChange = (event, value) => {
     setCurrentPage(value);
   };
- 
+
   const indexOfLastLeave = currentPage * leavesPerPage;
   const indexOfFirstLeave = indexOfLastLeave - leavesPerPage;
-  const currentLeaves = usersWithLeaves.slice(indexOfFirstLeave, indexOfLastLeave);
+  const currentLeaves = usersWithoutLeaves.slice(indexOfFirstLeave, indexOfLastLeave);
 
   return (
     <ThemeProvider theme={theme}>
@@ -74,7 +73,7 @@ export default function UsersWithLeaves() {
                 letterSpacing: "0.46px",
                 p: "10px",
               }}
-            >you can update user's leave counts</Typography>
+            >Newly Registered User</Typography>
           <TableContainer component={Paper}>
             <Table sx={{ minWidth: 700 }} aria-label="customized table">
               <TableHead>
@@ -85,23 +84,23 @@ export default function UsersWithLeaves() {
                   <StyledTableCell align="center">Address</StyledTableCell>
                   <StyledTableCell align="center">Email</StyledTableCell>
                   <StyledTableCell align="center">Gender</StyledTableCell>
-                  <StyledTableCell align="center">View More</StyledTableCell>
+                  <StyledTableCell>View More</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {currentLeaves.map((request) => (
-                  <StyledTableRow key={request.plazeruser.userId}>
-                    <TableCell component="th" scope="row">{request.plazeruser.userId}</TableCell>
-                    <TableCell component="th" scope="row">{request.plazeruser.userName}</TableCell>
-                    <TableCell component="th" scope="row">{request.plazeruser.userFName} {request.userLName}</TableCell>
-                    <TableCell align="center">{request.plazeruser.AddressL1} {request.plazeruser.AddressL2}</TableCell>
-                    <TableCell align="center">{request.plazeruser.Email}</TableCell>
-                    <TableCell align="center">{request.plazeruser.gender}</TableCell>
+                  <StyledTableRow key={request.userId}>
+                    <TableCell component="th" scope="row">{request.userId}</TableCell>
+                    <TableCell component="th" scope="row">{request.userName}</TableCell>
+                    <TableCell component="th" scope="row">{request.userFName} {request.userLName}</TableCell>
+                    <TableCell align="center">{request.AddressL1} {request.AddressL2}</TableCell>
+                    <TableCell align="center">{request.Email}</TableCell>
+                    <TableCell align="center">{request.gender}</TableCell>
                     <TableCell align="center">
                       <Button
                         variant="outlined"
                         component={Link}
-                        to={`/hr/adduserleaves/${request.plazeruser.userId}`}
+                        to={`/hr/adduserleaves/${request.userId}`}
                         sx={{
                           width: "70%",
                           color: "#2196F3",
@@ -115,7 +114,7 @@ export default function UsersWithLeaves() {
                           },
                         }}
                       >
-                        Update User Leaves
+                        Add Leaves for User
                       </Button>
                     </TableCell>
                   </StyledTableRow>
@@ -124,7 +123,7 @@ export default function UsersWithLeaves() {
             </Table>
           </TableContainer>
           <Pagination
-            count={Math.ceil(usersWithLeaves.length / leavesPerPage)}
+            count={Math.ceil(usersWithoutLeaves.length / leavesPerPage)}
             page={currentPage}
             onChange={handlePageChange}
             color="primary"
@@ -134,11 +133,6 @@ export default function UsersWithLeaves() {
               marginTop: "20px",
             }}
           />
-        </Box>
-        
-        <Box>
-          
-
         </Box>
       </div>
     </ThemeProvider>

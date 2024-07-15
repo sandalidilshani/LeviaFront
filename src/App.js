@@ -9,6 +9,7 @@ import AddUserLeaves from "./pages/hrmanager/AddUserLeaves";
 import UserPendingLeaves from "./pages/hrmanager/UserpendingLeaves";
 import Pendingleaves from "./pages/user/UserpendingLeaves";
 import UserHome from "./pages/user/Home";
+import NewUsers from "./pages/hrmanager/NewUsers"
 import LeaveRequest from "./pages/user/LeaveRequest";
 import UserHistory from "./pages/user/UserHistoryLeaves";
 import "./app.css";
@@ -36,6 +37,7 @@ function App() {
                   <Route path="/hr/alluserpendingleaves" element={<AllUsersPendingleaves />} />
                   <Route path="/hr/alluserhistory" element={<AllusersHistory />} />
                   <Route path="/hr/users" element={<Users />} />
+                  <Route path="/hr/newusers" element={<NewUsers />} />
                   <Route path="/hr/leavedetails" element={<Leave />} />
                   <Route path="/hr/leavetype" element={<Leavetype />} />
                   <Route path="/hr/leave/:leaveId" element={<Leave />} />

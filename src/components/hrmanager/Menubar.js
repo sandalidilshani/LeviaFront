@@ -83,7 +83,7 @@ const Sidebar = () => {
       bgcolor={"black"}
       color={"white"}
     >
-      <Box height="30%">
+      <Box height="25%">
         <img
           src={logo}
           width="256px"
@@ -135,9 +135,9 @@ const Sidebar = () => {
         <ListItem>
           <StyledListItemButton
             component="a"
-            href="/hr/users"
-            onClick={() => handlePageChange("/hr/users")}
-            active={activePage === "/hr/users"}
+            href="/hr/newusers"
+            onClick={() => handlePageChange("/hr/newusers")}
+            active={activePage === "/hr/newusers"}
           >
             <StyledListItemIcon>
               <Person />
@@ -145,6 +145,20 @@ const Sidebar = () => {
             <ListItemText primary="Add Leaves" />
           </StyledListItemButton>
         </ListItem>
+        <ListItem>
+          <StyledListItemButton
+            component="a"
+            href="/hr/users"
+            onClick={() => handlePageChange("/hr/users")}
+            active={activePage === "/hr/users"}
+          >
+            <StyledListItemIcon>
+              <Person />
+            </StyledListItemIcon>
+            <ListItemText primary="Users" />
+          </StyledListItemButton>
+        </ListItem>
+        
         <ListItem>
           <StyledListItemButton
             component="a"
