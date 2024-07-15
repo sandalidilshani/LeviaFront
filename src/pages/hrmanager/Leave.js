@@ -29,12 +29,12 @@ export default function Profile() {
   const [leaveStatusUpdate, setLeaveStatusUpdate] = useState(false);
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
   const [newStatus, setNewStatus] = useState("");
+  const [error, setError] = useState(null);
+
   const { leaveId } = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
-    
-
     const fetchLeaveDetails = async () => {
       try {
         const response = await axios.get(
@@ -42,8 +42,14 @@ export default function Profile() {
         );
         setLeaveDetails(response.data);
         setUser(response.data.userId.userId);
-      } catch (error) {
-        console.log("Error fetching leave details:", error);
+      } catch (err) {
+        if (err.response) {
+          setError(err.response.data.message);
+        } else if (err.request) {
+          setError('No response received from the server.');
+        } else {
+          setError('Error in setting up the request.');
+        }
       }
     };
 
@@ -51,39 +57,55 @@ export default function Profile() {
   }, [leaveId]);
 
   const handleUpdateLeaveStatus = async (status) => {
-  setConfirmDialogOpen(false);
-  setLeaveStatusUpdate(true);
-  try {
-    console.log(newStatus)
-    await axios.put(
-      `https://leviabackend-production-50e4.up.railway.app/leaverequest/updateleavestatus/${leaveId}`,
-      {
-        newStatus: status,
+    setConfirmDialogOpen(false);
+    setLeaveStatusUpdate(true);
+    
+    try {
+      await axios.put(
+        `https://leviabackend-production-50e4.up.railway.app/leaverequest/updateleavestatus/${leaveId}`,
+        {
+          newStatus: status,
+        }
+      );
+      
+      alert(`Leave request ${status}d successfully!`);
+      navigate(-1);
+    } catch (error) {
+      // Check if the error response contains the message
+      const message = error.response?.data?.message || error.message || "An error occurred. Please try again.";
+      
+      // Optionally handle specific error cases
+      if (error.response?.status === 500 && message === "Not enough available leaves") {
+        alert("user does not have enough available leaves to approve this request.");
+      } else {
+        alert(message); // General error alert
       }
-    );
-    alert(`Leave request ${status}d successfully!`);
-    navigate(-1);
-  } catch (error) {
-    console.error("Error updating leave status:", error.response || error.message || error);
-    alert("Failed to update leave status. Please try again later.");
-  } finally {
-    setLeaveStatusUpdate(false);
-  }
-};
-
+  
+      console.error("Error updating leave status:", error);
+    } finally {
+      setLeaveStatusUpdate(false);
+    }
+  };
+  
+  
 
   const openConfirmDialog = (status) => {
     setNewStatus(status);
     setConfirmDialogOpen(true);
   };
 
-  if ( !leaveDetails) {
+  if (!leaveDetails) {
     return <div>Loading...</div>;
   }
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column"}}>
-      <Box sx={{ display: "flex", flexDirection: "row",gap:2 , }}>
+    <Box sx={{ display: "flex", flexDirection: "column" }}>
+      {error && (
+        <Typography color="error" variant="body1" align="center">
+         {error}
+        </Typography>
+      )}
+      <Box sx={{ display: "flex", flexDirection: "row", gap: 2 }}>
         <Box sx={{ display: "flex", flexDirection: "column", flex: 8 }}>
           <UserDetailsCard userId={user} />
         </Box>
@@ -92,7 +114,7 @@ export default function Profile() {
           <Card sx={{ p: 2, width: "100%", mx: "auto" }}>
             <CardContent>
               <Typography variant="h5" fontWeight="bold" gutterBottom>
-                Leave Details
+                Leave Detailssss
               </Typography>
               <Divider color="#2196F3" sx={{ height: 2, width: "100%" }} />
 
