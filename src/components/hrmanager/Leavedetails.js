@@ -33,7 +33,7 @@ export default function Leavedetails() {
   useEffect(() => {
     const fetchLeaveDetails = async () => {
       try {
-        const response = await axios.get(`http://localhost:3009/leaverequest/${leaveId}`);
+        const response = await axios.get(`https://leviabackend-production-50e4.up.railway.app/leaverequest/${leaveId}`);
         console.log(response.data);
         setLeaveDetails(response.data);
       } catch (error) {
@@ -48,7 +48,7 @@ export default function Leavedetails() {
     setConfirmDialogOpen(false);
     setLeaveStatusUpdate(true);
     try {
-      await axios.put(`http://localhost:3009/leaverequest/updateleavestatus/${leaveId}`, {
+      await axios.put(`https://leviabackend-production-50e4.up.railway.app/leaverequest/updateleavestatus/${leaveId}`, {
         newStatus: status
       });
       alert(`Leave request ${status}d successfully!`);
