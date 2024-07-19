@@ -125,7 +125,7 @@ export default function Login() {
               }}
               onClick={handlePlazerLogin}
             >
-              Login With Google 
+              Login With Plazer
             </Button>
             <Typography variant="h6" color="text.secondary" component="div" sx={{ marginBottom: 5 }}>
               Or
